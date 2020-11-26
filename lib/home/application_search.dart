@@ -42,7 +42,7 @@ class _AppSearchState extends State<AppSearch> {
             borderSide: BorderSide(color: Colors.white),
           ),
           focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.black),
+            borderSide: BorderSide(color: Colors.white),
           ),
         ),
       ),

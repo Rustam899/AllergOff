@@ -13,6 +13,7 @@ class _AllergOffState extends State<AllergOff> {
   final routes = <String, WidgetBuilder>{
     // Путь, по которому создаётся Home Screen
     '/Home': (BuildContext context) => BottomBar(),
+    
   };
   @override
   Widget build(BuildContext context) {

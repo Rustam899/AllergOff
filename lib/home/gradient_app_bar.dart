@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'product_guide_filter.dart';
 
 class GradientAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 16, top: 26, bottom: 0,right:16),
+      padding: EdgeInsets.only(left: 16, top: 26, bottom: 0, right: 16),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.bottomLeft,
@@ -27,8 +28,17 @@ class GradientAppBar extends StatelessWidget {
             ),
           ),
           FloatingActionButton(
-            
-            onPressed: null,
+            focusElevation: 0.0,
+            hoverElevation: 0.0,
+            highlightElevation: 0.0,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Filter(),
+                ),
+              );
+            },
             child: Icon(
               Icons.format_list_bulleted_sharp,
             ),

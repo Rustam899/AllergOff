@@ -24,7 +24,7 @@ class _AppSearchState extends State<AppSearch> {
           colors: [
             const Color.fromRGBO(56, 183, 143, 1),
             const Color.fromRGBO(58, 167, 177, 1),
-          ], 
+          ],
         ),
       ),
       child: TextField(
@@ -42,7 +42,7 @@ class _AppSearchState extends State<AppSearch> {
             borderSide: BorderSide(color: Colors.white),
           ),
           focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
+            borderSide: BorderSide(color: Colors.black),
           ),
         ),
       ),

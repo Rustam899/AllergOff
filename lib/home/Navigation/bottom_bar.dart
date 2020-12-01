@@ -1,9 +1,9 @@
 import 'dart:ui';
+import 'package:allerg_off_prototype/auth.dart';
 import 'package:gradient_bottom_navigation_bar/gradient_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import '../splash/load_screen.dart';
-import 'package:allerg_off_prototype/home/product_guide.dart';
-
+import 'package:allerg_off_prototype/home/product_guide/product_guide.dart';
+import 'package:allerg_off_prototype/home/person.dart';
 class BottomBar extends StatefulWidget {
   @override
   _BottomBarState createState() => _BottomBarState();
@@ -15,7 +15,8 @@ class _BottomBarState extends State<BottomBar> {
   static List<Widget> _widgetOptions = <Widget>[
     //список экранов
     ProductGuide(),
-    LoadScreen(),
+    PersonWidget(),
+    AuthorizationPage(),
   ];
   void _onItemTapped(int index) {
     setState(() {
@@ -53,7 +54,7 @@ class _BottomBarState extends State<BottomBar> {
             title: Text('Person',style: TextStyle(color: Colors.white),),
           ),
           BottomNavigationBarItem(
-            activeIcon: Icon(Icons.person, color: Colors.yellowAccent),
+            activeIcon: Icon(Icons.map, color: Colors.yellowAccent),
             icon: Icon(
               Icons.map,
               color: Colors.white,

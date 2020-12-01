@@ -1,7 +1,7 @@
-import 'package:allerg_off_prototype/home/application_search.dart';
+import 'package:allerg_off_prototype/home/product_guide/application_search.dart';
 import 'package:flutter/material.dart';
-import 'package:allerg_off_prototype/home/bottom_bar.dart';
-import 'package:allerg_off_prototype/home/gradient_app_bar.dart';
+import 'package:allerg_off_prototype/home/Navigation/bottom_bar.dart';
+import 'package:allerg_off_prototype/home/product_guide/gradient_app_bar.dart';
 
 class ProductGuide extends StatefulWidget {
   @override

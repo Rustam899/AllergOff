@@ -18,11 +18,14 @@ class _PersonState extends State<PersonWidget> {
       body: Container(
         alignment: Alignment.center,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text('LogOut'),
             FloatingActionButton(
               onPressed: () {
                 AuthService().logOut();
               },
+              child: Icon(Icons.logout),
             ),
           ],
         ),

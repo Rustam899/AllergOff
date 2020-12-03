@@ -22,12 +22,42 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
   @override
   Widget build(BuildContext context) {
     Widget _logo() {
-      return Padding(
-        padding: EdgeInsets.only(top: 100),
-        child: Container(
-          child: Align(
-            child: Text('AllerOff'),
-          ),
+      return Container(
+        color: Colors.white,
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 24,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment(0.8, 0.0),
+                  colors: [
+                    const Color.fromRGBO(56, 183, 157, 1),
+                    const Color.fromRGBO(58, 167, 177, 1),
+                  ],
+                ),
+              ),
+            ),
+            Stack(
+              children: <Widget>[
+                Image(
+                  image: AssetImage('assets/images/BackOnRegAuthTop.png'),
+                ),
+                Container(
+                  padding: EdgeInsets.only(top: 65),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Image.asset('assets/icons/AllergAuth.png'),
+                      Image.asset('assets/icons/OFFAuth.png'),
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.center,
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       );
     }
@@ -39,18 +69,20 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
         child: TextField(
           controller: controller,
           obscureText: obscure,
-          style: TextStyle(fontSize: 20, color: Colors.white),
+          style: TextStyle(fontSize: 20, color: Colors.grey),
           decoration: InputDecoration(
             hintStyle: TextStyle(
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.normal,
                 fontSize: 20,
-                color: Colors.white30),
+                color: Colors.grey),
             hintText: hint,
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 3),
+              borderSide: BorderSide(color: Colors.grey, width: 1),
+              borderRadius: BorderRadius.circular(8),
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 1),
+              borderSide: BorderSide(color: Colors.grey, width: 1),
+              borderRadius: BorderRadius.circular(8),
             ),
             prefixIcon: Padding(
               padding: EdgeInsets.only(left: 10, right: 10),
@@ -66,15 +98,14 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
 
     Widget _button(String text, void func()) {
       return RaisedButton(
-        splashColor: Theme.of(context).primaryColor,
-        highlightColor: Theme.of(context).primaryColor,
-        color: Colors.white,
+        elevation: 0.0,
+        splashColor: Color.fromRGBO(58, 177, 155, 1),
+        highlightColor: Color.fromRGBO(58, 177, 155, 1),
+        color: Color.fromRGBO(58, 177, 155, 1),
         child: Text(
           text,
           style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).primaryColor,
-              fontSize: 20),
+              fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20),
         ),
         onPressed: () {
           func();
@@ -84,33 +115,53 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
 
     Widget _form(String label, void func()) {
       return Container(
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(bottom: 20, top: 10),
-              child:
-                  _input(Icon(Icons.email), "Почта", _emailController, false),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 20),
-              child:
-                  _input(Icon(Icons.lock), "Пароль", _passwordController, true),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                left: 20,
-                right: 20,
+        child: Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Container(
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 20, top: 10),
+                      child: _input(
+                          Icon(
+                            Icons.email,
+                            color: Color.fromRGBO(58, 177, 155, 1),
+                          ),
+                          "Почта",
+                          _emailController,
+                          false),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 20),
+                      child: _input(
+                          Icon(Icons.lock,
+                              color: Color.fromRGBO(58, 177, 155, 1)),
+                          "Пароль",
+                          _passwordController,
+                          true),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ],
+                ),
               ),
-              child: Container(
-                height: 50,
-                width: MediaQuery.of(context).size.width,
-                child: _button(label, func),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 20,
+                  right: 20,
+                  bottom: 16,
+                ),
+                child: Container(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width,
+                  child: _button(label, func),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     }
@@ -157,90 +208,72 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
       }
     }
 
-    Widget _bottomWave() {
-      return Expanded(
-        child: Align(
-          child: ClipPath(
-            child: Container(
-              color: Colors.white,
-              height: 300,
-            ),
-            clipper: BottomWaveClipper(),
-          ),
-          alignment: Alignment.bottomCenter,
-        ),
-      );
-    }
-
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
+      resizeToAvoidBottomPadding: false,
+      backgroundColor: Colors.white,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           _logo(),
           SizedBox(
-            height: 100,
+            height: 41,
           ),
           (showLogin
-              ? Column(
-                  children: <Widget>[
-                    _form('Войти', _loginButtonAction),
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: GestureDetector(
-                        child: Text(
-                          'Впервые? Зарегестрируйтесь!',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+              ? Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      _form('Войти', _loginButtonAction),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 36),
+                        child: GestureDetector(
+                          child: Text.rich(TextSpan(
+                            text: 'Впервые?',
+                            style: TextStyle(fontSize: 14, color: Colors.black),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: ' Зарегестрируйтесь! ',
+                                style: TextStyle(
+                                    color: Color.fromRGBO(58, 177, 155, 1)),
+                              ),
+                            ],
+                          )),
+                          onTap: () {
+                            setState(() {
+                              showLogin = false;
+                            });
+                          },
                         ),
-                        onTap: () {
-                          setState(() {
-                            showLogin = false;
-                          });
-                        },
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 )
-              : Column(
-                  children: <Widget>[
-                    _form('Зарегестрироваться', _registerButtonAction),
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: GestureDetector(
-                        child: Text(
-                          'Войти',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+              : Expanded(
+                  child: Column(
+                    children: <Widget>[
+                      _form('Зарегестрироваться', _registerButtonAction),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 36),
+                        child: GestureDetector(
+                          child: Text('Войти',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.black,
+                              )),
+                          onTap: () {
+                            setState(() {
+                              showLogin = true;
+                            });
+                          },
                         ),
-                        onTap: () {
-                          setState(() {
-                            showLogin = true;
-                          });
-                        },
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 )),
-          _bottomWave(),
         ],
       ),
     );
   }
 }
 
-class BottomWaveClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = Path();
-    path.moveTo(size.width, 0.0);
-    path.lineTo(size.width, size.height);
-    path.lineTo(0.0, size.height);
-    path.lineTo(0.0, size.height + 5);
-    var secondControlPoint = Offset(size.width - (size.width / 6), size.height);
-    var secondEndPoint = Offset(size.width, 0.0);
-    path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
-        secondEndPoint.dx, secondEndPoint.dy);
-    return path;
-  }
 
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
-}

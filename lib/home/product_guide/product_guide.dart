@@ -31,6 +31,7 @@ class _ProductGuideState extends State<ProductGuide> {
           children: <Widget>[
             GradientAppBar(),
             AppSearch(),
+            ProductCard(Text("Test",style: TextStyle(fontSize:16,color:Color.fromRGBO(55,71,113,1)),),Color.fromRGBO(220,88,80,1),3,3,3,3,3,3)
           ],
         ),
       ),

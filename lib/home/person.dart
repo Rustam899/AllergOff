@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:allerg_off_prototype/services/auth.dart';
-import 'package:allerg_off_prototype/services/auth.dart';
 
 class PersonWidget extends StatefulWidget {
   @override

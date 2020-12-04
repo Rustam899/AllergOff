@@ -1,9 +1,11 @@
+import 'package:allerg_off_prototype/domain/UserLocal.dart';
 import 'package:flutter/material.dart';
 import 'package:allerg_off_prototype/domain/User.dart';
 import 'package:allerg_off_prototype/splash/load_screen.dart';
 import 'package:allerg_off_prototype/splash/lending.dart';
 import 'package:provider/provider.dart';
 import 'package:allerg_off_prototype/services/auth.dart';
+import 'package:allerg_off_prototype/domain/UserLocal.dart';
 
 void main() => runApp(AllergOff());
 
@@ -20,12 +22,15 @@ class _AllergOffState extends State<AllergOff> {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<User>.value(
-      value:AuthService().currentUser,
-      child:MaterialApp(
-      theme: ThemeData(fontFamily: 'Roboto'),
-      home: LoadScreen(nextRoute:'/Navigation/LendingPage'),
-      routes: routes,
-    ),
+      value: AuthService().currentUser,
+      child: ChangeNotifierProvider<UserLocal>(
+        create: (context) => UserLocal(),
+        child: MaterialApp(
+          theme: ThemeData(fontFamily: 'Roboto'),
+          home: LoadScreen(nextRoute: '/Navigation/LendingPage'),
+          routes: routes,
+        ),
+      ),
     );
   }
 }

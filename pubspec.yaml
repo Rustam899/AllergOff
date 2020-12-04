@@ -36,6 +36,7 @@ dependencies:
   sqflite: any
   intl: ^0.15.7
   path_provider: any
+  curved_navigation_bar: ^0.3.2
 
 dev_dependencies:
   flutter_test:

@@ -45,7 +45,7 @@ class Allerg {
 	}
 
 	Allerg.fromMapObject(Map<String, dynamic> map) {
-		this._typeId = map['typeId']
+		this._typeId = map['typeId'];
 		this._typeName = map['typeName'];
 		this._foodId = map['foodId'];
 		this._foodName = map['foodName'];

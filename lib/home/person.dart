@@ -11,21 +11,25 @@ class _PersonState extends State<PersonWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(58, 167, 177, 1),
-        title: Text('Пользователь'),
+        backgroundColor: Color.alphaBlend(
+            Color.fromRGBO(56, 183, 143, 1), Color.fromRGBO(58, 167, 177, 1)),
+        title: Text('Личный кабинет'),
       ),
       body: Container(
+        padding: EdgeInsets.only(bottom:32),
         alignment: Alignment.center,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            Text('LogOut'),
-            FloatingActionButton(
+            RaisedButton(
+              padding: EdgeInsets.symmetric(vertical:12,horizontal:10),
               onPressed: () {
                 AuthService().logOut();
               },
-              child: Icon(Icons.logout),
-            ),
+              child: Text("Выйти из учтеной запись",style: TextStyle(color:Colors.white,fontSize:18,),textAlign: TextAlign.center,),
+              color: Color.alphaBlend(Color.fromRGBO(56, 183, 143, 1),
+                  Color.fromRGBO(58, 167, 177, 1)),
+            )
           ],
         ),
       ),

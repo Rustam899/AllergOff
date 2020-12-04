@@ -275,5 +275,3 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
     );
   }
 }
-
-

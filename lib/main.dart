@@ -5,7 +5,6 @@ import 'package:allerg_off_prototype/splash/load_screen.dart';
 import 'package:allerg_off_prototype/splash/lending.dart';
 import 'package:provider/provider.dart';
 import 'package:allerg_off_prototype/services/auth.dart';
-import 'package:allerg_off_prototype/domain/UserLocal.dart';
 
 void main() => runApp(AllergOff());
 

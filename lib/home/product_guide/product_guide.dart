@@ -14,7 +14,15 @@ class _ProductGuideState extends State<ProductGuide> {
   void initState() {
     super.initState();
   }
-
+  //final products = <ProductCard>[
+    //ProductCard(Text("Яблоки"),Colors.grey[600],3,3,3,3,3,3),
+    //ProductCard(Text("Сельдь"),Colors.grey[600],3,3,3,3,3,3),
+    //ProductCard(Text("Бананы"),Colors.grey[600],3,3,3,3,3,3),
+    //ProductCard(Text("Куриное мясо"),Colors.grey[600],3,3,3,3,3,3),
+    //ProductCard(Text("Красное мясо"),Colors.grey[600],3,3,3,3,3,3),
+    //ProductCard(Text("Огурцы"),Colors.grey[600],3,3,3,3,3,3),
+    //ProductCard(Text("Креветки"),Colors.grey[600],3,3,3,3,3,3),
+  //];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

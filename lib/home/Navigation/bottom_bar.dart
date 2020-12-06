@@ -4,7 +4,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:gradient_bottom_navigation_bar/gradient_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:allerg_off_prototype/home/product_guide/product_guide.dart';
-import 'package:allerg_off_prototype/home/person.dart';
+import 'package:allerg_off_prototype/home/person_area/person.dart';
 
 class BottomBar extends StatefulWidget {
   @override
@@ -35,6 +35,7 @@ class _BottomBarState extends State<BottomBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
+        height: 55,
         color: Color.alphaBlend(
             Color.fromRGBO(56, 183, 143, 1), Color.fromRGBO(58, 167, 177, 1)),
         /* backgroundColor: Color.alphaBlend(

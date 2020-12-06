@@ -1,3 +1,4 @@
+import 'package:allerg_off_prototype/home/person_area/levelAllerg.dart';
 import 'package:flutter/material.dart';
 import 'package:allerg_off_prototype/services/auth.dart';
 
@@ -21,6 +22,20 @@ class _PersonState extends State<PersonWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
+            RaisedButton(
+              padding: EdgeInsets.symmetric(vertical:12,horizontal:10),
+              onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AllergLevels(),
+                ),
+              );
+             },
+              child: Text("Мои непереносимости",style: TextStyle(color:Colors.white,fontSize:18,),textAlign: TextAlign.center,),
+              color: Color.alphaBlend(Color.fromRGBO(56, 183, 143, 1),
+                  Color.fromRGBO(58, 167, 177, 1)),
+            ),
             RaisedButton(
               padding: EdgeInsets.symmetric(vertical:12,horizontal:10),
               onPressed: () {

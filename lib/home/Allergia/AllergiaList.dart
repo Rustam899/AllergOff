@@ -18,6 +18,7 @@ class AllergiaListState extends State<AllergiaList> {
   Widget build(BuildContext context) {
     if (allergList == null) {
       allergList = List<Allergia>();
+      updateListView();
     }
     return getAllergListView();
   }
@@ -67,6 +68,8 @@ class AllergiaListState extends State<AllergiaList> {
     allergListFuture.then((allergList) {
       setState(() {
         this.allergList = allergList;
+        print(allergList[0].food_name);
+        if (allergList.isEmpty) print('Kek');
         this.count = allergList.length;
       });
     });
@@ -78,9 +81,11 @@ class AllergiaListState extends State<AllergiaList> {
         'Content-Type': 'application/json; charset=UTF-8',
       };
       //ссылка другая будет
-      final response = await http.get('http://127.0.0.1:5000/',
+      final response = await http.get(
+          'https://jsonplaceholder.typicode.com/posts',
           headers:
               headers); // get запрос выдает список из json, где каждый json описывает один объект
+      print(response.body);
 
       dynamic jsonObject = convert.jsonDecode(utf8.decode(response.bodyBytes));
 

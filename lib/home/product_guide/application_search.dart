@@ -6,6 +6,7 @@ class AppSearch extends StatefulWidget {
 }
 
 class _AppSearchState extends State<AppSearch> {
+  final myController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,6 +45,7 @@ class _AppSearchState extends State<AppSearch> {
             borderSide: BorderSide(color: Colors.white),
           ),
         ),
+        controller: myController,
       ),
     );
   }

@@ -1,49 +1,49 @@
 import 'package:flutter/cupertino.dart';
-
+import 'package:provider/provider.dart';
 class UserLocal with ChangeNotifier{
   //значения непереносимостей от 0 до 4
-  int _fructose = 0;
-  int _lactose = 0;
-  int _histamine = 0;
-  int _sorbitol = 0;
-  int _gluten = 0;
-  int _salcylicAcid = 0;
+  double _fructose;
+  double _lactose;
+  double _histamine;
+  double _sorbitol;
+  double _gluten;
+  double _salcylicAcid;
   
   //настройки фильтра
   bool _personFilterOn =false; // фильтр вкл/вкл
   int _filterNumber = 0; // номер настройки фильтры(то что можно - 1,не рекомендованно - 2, нельзя - 3 , выключен - 0)
   //гетеры
-  int get fructose => _fructose;
-  int get lactose => _lactose;
-  int get histamine => _histamine;
-  int get sorbitol => _sorbitol;
-  int get gluten => _gluten;
-  int get salcylicAcid => _salcylicAcid;
+  double get fructose => _fructose;
+  double get lactose => _lactose;
+  double get histamine => _histamine;
+  double get sorbitol => _sorbitol;
+  double get gluten => _gluten;
+  double get salcylicAcid => _salcylicAcid;
   bool get personFilterOn => _personFilterOn;
   int get filterNumber => _filterNumber;
 
   //cеттеры
-  set setFructose(int value) { 
+  set setFructose(double value) { 
     _fructose=value;
     notifyListeners();
   }
-  set setLactose(int value) { 
+  set setLactose(double value) { 
     _lactose=value;
     notifyListeners();
   }
-  set setHistamine(int value) {
+  set setHistamine(double value) {
     _histamine=value;
     notifyListeners();
   }
-  set setSorbitol(int value) {
+  set setSorbitol(double value) {
      _sorbitol=value;
      notifyListeners();
   }
-  set setGluten(int value) { 
+  set setGluten(double value) { 
     _gluten=value;
     notifyListeners();
   }
-  set setSalcylicAcid(int value) {
+  set setSalcylicAcid(double value) {
     _salcylicAcid=value;
     notifyListeners();
   }

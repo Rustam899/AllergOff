@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'dart:math';
-
+import 'dart:io';
+import 'package:provider/provider.dart';
+import 'package:allerg_off_prototype/domain/UserLocal.dart';
+import 'package:path_provider/path_provider.dart';
 
 class AllergLevels extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Мои непереносимости'),
-          backgroundColor: Color.alphaBlend(Color.fromRGBO(56, 183, 143, 1),
-                  Color.fromRGBO(58, 167, 177, 1)),
-        ),
-        body: Column(
-          children: <Widget>[
-            Flexible(fit: FlexFit.tight, child: Widj(0)),
-            Flexible(fit: FlexFit.tight, child: Widj(1)),
-            Flexible(fit: FlexFit.tight, child: Widj(2)),
-            Flexible(fit: FlexFit.tight, child: Widj(3)),
-            Flexible(fit: FlexFit.tight, child: Widj(4)),
-            Flexible(fit: FlexFit.tight, child: Widj(5)),
-          ],
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Мои непереносимости'),
+        backgroundColor: Color.alphaBlend(
+            Color.fromRGBO(56, 183, 143, 1), Color.fromRGBO(58, 167, 177, 1)),
+      ),
+      body: Column(
+        children: <Widget>[
+          Flexible(fit: FlexFit.tight, child: Level(0)),
+          Flexible(fit: FlexFit.tight, child: Level(1)),
+          Flexible(fit: FlexFit.tight, child: Level(2)),
+          Flexible(fit: FlexFit.tight, child: Level(3)),
+          Flexible(fit: FlexFit.tight, child: Level(4)),
+          Flexible(fit: FlexFit.tight, child: Level(5)),
+        ],
       ),
     );
   }
@@ -36,11 +37,9 @@ var list = [
   Color.fromRGBO(220, 88, 80, 1)
 ];
 
-var levels = [0, 0, 0, 0, 0, 0];
-
-class Widj extends StatelessWidget {
+class Level extends StatelessWidget {
   var ind;
-  Widj(int i) {
+  Level(int i) {
     ind = i;
   }
   var names = [
@@ -91,40 +90,237 @@ class Slyd extends StatefulWidget {
 
 class _SlydState extends State<Slyd> {
   int ind;
+  var zero= 0;
+  var levels;
+  String str='';
   double _currentSliderValue = 0;
+  String _localFileContent='';
   _SlydState(indr) {
     ind = indr;
   }
   @override
+  void initState() {
+    super.initState();
+    this.read();
+  }
+
+  void write(String str) async{
+    await this._writeTextToLocalFile(str);
+  }
+  void read () async{
+    await this._readTextFromLocalFile();
+  }
+  @override
   Widget build(BuildContext context) {
     return Container(
-      child: SliderTheme(
-        data: SliderTheme.of(context).copyWith(
-          activeTrackColor: list[_currentSliderValue.round()],
-          inactiveTrackColor: list[_currentSliderValue.round()],
-          trackShape: RoundSliderTrackShape(),
-          trackHeight: 22.0,
-          rangeTrackShape: RoundedRectRangeSliderTrackShape(),
-          thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10.0),
-          thumbColor: Colors.white,
-          overlayShape: RoundSliderOverlayShape(overlayRadius: 22.0),
-          activeTickMarkColor: list[_currentSliderValue.round()],
-          inactiveTickMarkColor: list[_currentSliderValue.round()],
-        ),
-        child: Slider(
-            value: _currentSliderValue,
-            min: 0,
-            max: 4,
-            divisions: 4,
-            onChanged: (double value) {
-              setState(() {
-                _currentSliderValue = value;
-                levels[ind] = value.round();
-              });
-            }),
-      ),
-    );
+              child: SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  activeTrackColor: list[(ind == 0)
+                      ? Provider.of<UserLocal>(context, listen: true).fructose.round()
+                      : (ind == 1)
+                          ? Provider.of<UserLocal>(context, listen: true)
+                              .lactose
+                              .round()
+                          : (ind == 2)
+                              ? Provider.of<UserLocal>(context, listen: true)
+                                  .histamine
+                                  .round()
+                              : (ind == 3)
+                                  ? Provider.of<UserLocal>(context, listen: true)
+                                      .sorbitol
+                                      .round()
+                                  : (ind == 4)
+                                      ? Provider.of<UserLocal>(context, listen: true)
+                                          .gluten
+                                          .round()
+                                      : (ind == 5)
+                                          ? Provider.of<UserLocal>(context,
+                                                  listen: true)
+                                              .salcylicAcid
+                                              .round()
+                                          : DoNothingAction()],
+                  inactiveTrackColor: list[(ind == 0)
+                      ? Provider.of<UserLocal>(context, listen: true).fructose.round()
+                      : (ind == 1)
+                          ? Provider.of<UserLocal>(context, listen: true)
+                              .lactose
+                              .round()
+                          : (ind == 2)
+                              ? Provider.of<UserLocal>(context, listen: true)
+                                  .histamine
+                                  .round()
+                              : (ind == 3)
+                                  ? Provider.of<UserLocal>(context, listen: true)
+                                      .sorbitol
+                                      .round()
+                                  : (ind == 4)
+                                      ? Provider.of<UserLocal>(context, listen: true)
+                                          .gluten
+                                          .round()
+                                      : (ind == 5)
+                                          ? Provider.of<UserLocal>(context,
+                                                  listen: true)
+                                              .salcylicAcid
+                                              .round()
+                                          : DoNothingAction()],
+                  trackShape: RoundSliderTrackShape(),
+                  trackHeight: 22.0,
+                  rangeTrackShape: RoundedRectRangeSliderTrackShape(),
+                  thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10.0),
+                  thumbColor: Colors.white,
+                  overlayShape: RoundSliderOverlayShape(overlayRadius: 22.0),
+                  activeTickMarkColor: list[(ind == 0)
+                      ? Provider.of<UserLocal>(context, listen: true).fructose.round()
+                      : (ind == 1)
+                          ? Provider.of<UserLocal>(context, listen: true)
+                              .lactose
+                              .round()
+                          : (ind == 2)
+                              ? Provider.of<UserLocal>(context, listen: true)
+                                  .histamine
+                                  .round()
+                              : (ind == 3)
+                                  ? Provider.of<UserLocal>(context, listen: true)
+                                      .sorbitol
+                                      .round()
+                                  : (ind == 4)
+                                      ? Provider.of<UserLocal>(context, listen: true)
+                                          .gluten
+                                          .round()
+                                      : (ind == 5)
+                                          ? Provider.of<UserLocal>(context,
+                                                  listen: true)
+                                              .salcylicAcid
+                                              .round()
+                                          : DoNothingAction()],
+                  inactiveTickMarkColor: list[(ind == 0)
+                      ? Provider.of<UserLocal>(context, listen: true).fructose.round()
+                      : (ind == 1)
+                          ? Provider.of<UserLocal>(context, listen: true)
+                              .lactose
+                              .round()
+                          : (ind == 2)
+                              ? Provider.of<UserLocal>(context, listen: true)
+                                  .histamine
+                                  .round()
+                              : (ind == 3)
+                                  ? Provider.of<UserLocal>(context, listen: true)
+                                      .sorbitol
+                                      .round()
+                                  : (ind == 4)
+                                      ? Provider.of<UserLocal>(context, listen: true)
+                                          .gluten
+                                          .round()
+                                      : (ind == 5)
+                                          ? Provider.of<UserLocal>(context,
+                                                  listen: true)
+                                              .salcylicAcid
+                                              .round()
+                                          : DoNothingAction()],
+                ),
+                child: Slider(
+                    value: (ind == 0)
+                        ? (Provider.of<UserLocal>(context, listen: true).fructose)
+                        : (ind == 1)
+                            ? Provider.of<UserLocal>(context, listen: true).lactose
+                            : (ind == 2)
+                                ? Provider.of<UserLocal>(context, listen: true)
+                                    .histamine
+                                : (ind == 3)
+                                    ? Provider.of<UserLocal>(context, listen: true)
+                                        .sorbitol
+                                    : (ind == 4)
+                                        ? Provider.of<UserLocal>(context, listen: true)
+                                            .gluten
+                                        : (ind == 5)
+                                            ? Provider.of<UserLocal>(context,
+                                                    listen: true)
+                                                .salcylicAcid
+                                            : DoNothingAction(),
+                    min: 0,
+                    max: 4,
+                    divisions: 4,
+                    onChanged: (double value) {
+                      setState(() {
+                        _currentSliderValue = value;
+                        (ind == 0)
+                            ? Provider.of<UserLocal>(context, listen: false)
+                                .setFructose = value
+                            : (ind == 1)
+                                ? Provider.of<UserLocal>(context, listen: false)
+                                    .setLactose = value
+                                : (ind == 2)
+                                    ? Provider.of<UserLocal>(context, listen: false)
+                                        .setHistamine = value
+                                    : (ind == 3)
+                                        ? Provider.of<UserLocal>(context, listen: false)
+                                            .setSorbitol = value
+                                        : (ind == 4)
+                                            ? Provider.of<UserLocal>(context,
+                                                    listen: false)
+                                                .setGluten = value
+                                            : (ind == 5)
+                                                ? Provider.of<UserLocal>(context,
+                                                        listen: false)
+                                                    .setSalcylicAcid = value
+                                                : DoNothingAction();
+                        str=Provider.of<UserLocal>(context, listen: false).fructose.toString()+" "+
+                        Provider.of<UserLocal>(context, listen: false).lactose.toString()+" "+
+                        Provider.of<UserLocal>(context, listen: false).histamine.toString()+" "+
+                        Provider.of<UserLocal>(context, listen: false).sorbitol.toString()+" "+
+                        Provider.of<UserLocal>(context, listen: false).gluten.toString()+" "+
+                        Provider.of<UserLocal>(context, listen: false).salcylicAcid.toString();
+                        this._writeTextToLocalFile(str);
+                      });
+                       
+                        
+                    }
+                ),
+              ),
+            );
   }
+
+  Future<String> get _getLocalPath async {
+    final directory =await getApplicationDocumentsDirectory();
+    return directory.path;
+  }
+  
+  Future<File> get _getLocalFile async {
+    final path = await _getLocalPath;
+    return File('$path/uevels.txt');
+  }
+
+  Future<File> _writeTextToLocalFile(String text) async {
+    final file = await _getLocalFile;
+    return file.writeAsString(text);
+  }
+
+  Future _readTextFromLocalFile() async{
+    String content;
+    try{
+      final file = await _getLocalFile;
+      content= await file.readAsString();
+    }catch(e)
+    {
+      content= 'Error loading loacl file: $e';
+    }
+
+    setState(() {
+      this._localFileContent=content;
+    });
+  }
+  /* Future _readTextFromLocalFile() async {
+    String content;
+    try {
+      final file = await _getLocalFile;
+      content = await file.readAsString();
+    } catch(e){
+      content='Error loading local file: $e';
+    }
+    setState(() {
+      this.text=content;
+    });
+  } */
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////

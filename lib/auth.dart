@@ -41,8 +41,14 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
             ),
             Stack(
               children: <Widget>[
-                Image(
-                  image: AssetImage('assets/images/BackOnRegAuthTop.png'),
+                Container(
+                  height: 230,
+                    decoration:BoxDecoration(
+                    image: DecorationImage(
+                      fit:BoxFit.fill,
+                      image: AssetImage('assets/images/BackOnRegAuthTop.png'),
+                    )
+                  ),
                 ),
                 Container(
                   padding: EdgeInsets.only(top: 65),

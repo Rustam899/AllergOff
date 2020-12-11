@@ -37,8 +37,7 @@ class _BottomBarState extends State<BottomBar> {
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
         height: 55,
-        color: Color.alphaBlend(
-            Color.fromRGBO(56, 183, 143, 1), Color.fromRGBO(58, 167, 177, 1)),
+        color: Color.fromRGBO(58, 177, 155, 1),
         /* backgroundColor: Color.alphaBlend(
             Color.fromRGBO(56, 183, 143, 1), Color.fromRGBO(58, 167, 177, 1)), */
         backgroundColor: Colors.white,

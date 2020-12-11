@@ -39,6 +39,7 @@ dependencies:
   curved_navigation_bar: ^0.3.2
   flutter_map: any
   latlong: ^0.6.1
+  location: ^3.0.0
 
 dev_dependencies:
   flutter_test:

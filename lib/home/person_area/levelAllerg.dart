@@ -317,7 +317,7 @@ class _SlydState extends State<Slyd> {
       final file = await _getLocalFile;
       content = await file.readAsString();
     } catch (e) {
-      content = 'Error loading loacl file: $e';
+      content = 'Error loading local file: $e';
     }
 
     setState(() {

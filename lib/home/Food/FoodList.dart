@@ -14,189 +14,143 @@ class FoodList extends StatefulWidget {
 }
 
 class FoodListState extends State<FoodList> {
-  int count = allergList.length;
   @override
   Widget build(BuildContext context) {
     if (allergList == null) {
       allergList = List<Food>();
     }
-    return getAllergListView();
+    if (Provider.of<UserLocal>(context, listen: true).filterNumber == 0) {
+      return getAllergListView();
+    }
+    if (Provider.of<UserLocal>(context, listen: true).filterNumber == 1) {
+      /* allergList.clear();
+      getListCanEat();
+      return getAllerListViewThatCanEat(); */
+    }
+    if (Provider.of<UserLocal>(context, listen: true).filterNumber == 3) {
+      /* allergList.clear();
+      getListCantEat();
+      return getAllerListViewThatCantEat(); */
+    }
+  }
+
+  ListView getAllerListViewThatCantEat() {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: allergList.length,
+      itemBuilder: (BuildContext context, int position) {
+        return ProductCard(
+            Text(allergList[position].food_name),
+            getColorType(allergList[position].fruc),
+            getColorType(allergList[position].lack),
+            getColorType(allergList[position].gist),
+            getColorType(allergList[position].sorb),
+            getColorType(allergList[position].glut),
+            getColorType(allergList[position].salcis),
+            allergList[position].fruc,
+            allergList[position].lack,
+            allergList[position].gist,
+            allergList[position].sorb,
+            allergList[position].glut,
+            allergList[position].salcis);
+      },
+    );
+  }
+
+  void getListCantEat() {
+    for (int i = 0; i < allergiaList.length; i++) {
+      if (Provider.of<UserLocal>(context, listen: true).lactose +
+                  allergiaList[i].lack >
+              4 ||
+          Provider.of<UserLocal>(context, listen: true).fructose +
+                  allergiaList[i].fruc >
+              4 ||
+          Provider.of<UserLocal>(context, listen: true).histamine +
+                  allergiaList[i].gist >
+              4 ||
+          Provider.of<UserLocal>(context, listen: true).sorbitol +
+                  allergiaList[i].sorb >
+              4 ||
+          Provider.of<UserLocal>(context, listen: true).gluten +
+                  allergiaList[i].glut >
+              4 ||
+          Provider.of<UserLocal>(context, listen: true).salcylicAcid +
+                  allergiaList[i].salcis >
+              4) {
+        allergList.add(allergiaList[i]);
+      }
+    }
+  }
+
+  ListView getAllerListViewThatCanEat() {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: allergList.length,
+      itemBuilder: (BuildContext context, int position) {
+        return ProductCard(
+            Text(allergList[position].food_name),
+            getColorType(allergList[position].fruc),
+            getColorType(allergList[position].lack),
+            getColorType(allergList[position].gist),
+            getColorType(allergList[position].sorb),
+            getColorType(allergList[position].glut),
+            getColorType(allergList[position].salcis),
+            allergList[position].fruc,
+            allergList[position].lack,
+            allergList[position].gist,
+            allergList[position].sorb,
+            allergList[position].glut,
+            allergList[position].salcis);
+      },
+    );
+  }
+
+  void getListCanEat() {
+    for (int i = 0; i < allergiaList.length; i++) {
+      if (Provider.of<UserLocal>(context, listen: true).lactose +
+                  allergiaList[i].lack <=
+              4 &&
+          Provider.of<UserLocal>(context, listen: true).fructose +
+                  allergiaList[i].fruc <=
+              4 &&
+          Provider.of<UserLocal>(context, listen: true).histamine +
+                  allergiaList[i].gist <=
+              4 &&
+          Provider.of<UserLocal>(context, listen: true).sorbitol +
+                  allergiaList[i].sorb <=
+              4 &&
+          Provider.of<UserLocal>(context, listen: true).gluten +
+                  allergiaList[i].glut <=
+              4 &&
+          Provider.of<UserLocal>(context, listen: true).salcylicAcid +
+                  allergiaList[i].salcis <=
+              4) {
+        allergList.add(allergiaList[i]);
+      }
+    }
   }
 
   ListView getAllergListView() {
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: getCount(allergList),
+      itemCount: allergiaList.length,
       itemBuilder: (BuildContext context, int position) {
-        log(Provider.of<UserLocal>(context, listen: true)
-            .filterNumber
-            .toString());
-        log(Provider.of<UserLocal>(context, listen: true)
-            .personFilterOn
-            .toString());
-        if (Provider.of<UserLocal>(context, listen: true).personFilterOn ==
-            false) {
-          return ProductCard(
-              Text(allergList[position].food_name),
-              getColorType(allergList[position].fruc),
-              getColorType(allergList[position].lack),
-              getColorType(allergList[position].gist),
-              getColorType(allergList[position].sorb),
-              getColorType(allergList[position].glut),
-              getColorType(allergList[position].salcis),
-              allergList[position].fruc,
-              allergList[position].lack,
-              allergList[position].gist,
-              allergList[position].sorb,
-              allergList[position].glut,
-              allergList[position].salcis);
-        } else {
-          if (Provider.of<UserLocal>(context, listen: true).filterNumber == 3) {
-            if ((Provider.of<UserLocal>(context, listen: true).lactose)
-                            .toInt() +
-                        allergList[position].lack >
-                    4 &&
-                (Provider.of<UserLocal>(context, listen: true).fructose)
-                            .toInt() +
-                        allergList[position].fruc >
-                    4 &&
-                (Provider.of<UserLocal>(context, listen: true).histamine)
-                            .toInt() +
-                        allergList[position].gist >
-                    4 &&
-                (Provider.of<UserLocal>(context, listen: true).sorbitol)
-                            .toInt() +
-                        allergList[position].sorb >
-                    4 &&
-                (Provider.of<UserLocal>(context, listen: true).gluten).toInt() +
-                        allergList[position].glut >
-                    4 &&
-                (Provider.of<UserLocal>(context, listen: true).salcylicAcid)
-                            .toInt() +
-                        allergList[position].salcis >
-                    4) {
-              return ProductCard(
-                  Text(allergList[position].food_name),
-                  getColorType(allergList[position].fruc),
-                  getColorType(allergList[position].lack),
-                  getColorType(allergList[position].gist),
-                  getColorType(allergList[position].sorb),
-                  getColorType(allergList[position].glut),
-                  getColorType(allergList[position].salcis),
-                  allergList[position].fruc,
-                  allergList[position].lack,
-                  allergList[position].gist,
-                  allergList[position].sorb,
-                  allergList[position].glut,
-                  allergList[position].salcis);
-            }
-          } else if (Provider.of<UserLocal>(context, listen: true)
-                  .filterNumber ==
-              1) {
-            if ((Provider.of<UserLocal>(context, listen: true).lactose)
-                            .toInt() +
-                        allergList[position].lack <=
-                    4 &&
-                (Provider.of<UserLocal>(context, listen: true).fructose)
-                            .toInt() +
-                        allergList[position].fruc <=
-                    4 &&
-                (Provider.of<UserLocal>(context, listen: true).histamine)
-                            .toInt() +
-                        allergList[position].gist <=
-                    4 &&
-                (Provider.of<UserLocal>(context, listen: true).sorbitol)
-                            .toInt() +
-                        allergList[position].sorb <=
-                    4 &&
-                (Provider.of<UserLocal>(context, listen: true).gluten).toInt() +
-                        allergList[position].glut <=
-                    4 &&
-                (Provider.of<UserLocal>(context, listen: true).salcylicAcid)
-                            .toInt() +
-                        allergList[position].salcis <=
-                    4) {
-              return ProductCard(
-                  Text(allergList[position].food_name),
-                  getColorType(allergList[position].fruc),
-                  getColorType(allergList[position].lack),
-                  getColorType(allergList[position].gist),
-                  getColorType(allergList[position].sorb),
-                  getColorType(allergList[position].glut),
-                  getColorType(allergList[position].salcis),
-                  allergList[position].fruc,
-                  allergList[position].lack,
-                  allergList[position].gist,
-                  allergList[position].sorb,
-                  allergList[position].glut,
-                  allergList[position].salcis);
-            }
-          }
-        }
+        return ProductCard(
+            Text(allergiaList[position].food_name),
+            getColorType(allergiaList[position].fruc),
+            getColorType(allergiaList[position].lack),
+            getColorType(allergiaList[position].gist),
+            getColorType(allergiaList[position].sorb),
+            getColorType(allergiaList[position].glut),
+            getColorType(allergiaList[position].salcis),
+            allergiaList[position].fruc,
+            allergiaList[position].lack,
+            allergiaList[position].gist,
+            allergiaList[position].sorb,
+            allergiaList[position].glut,
+            allergiaList[position].salcis);
       },
     );
-  }
-
-  int getCount(List<Food> aller) {
-    int cnt = 0;
-    if (Provider.of<UserLocal>(context, listen: true).personFilterOn == false) {
-      return aller.length;
-    } else {
-      if (Provider.of<UserLocal>(context, listen: true).filterNumber == 1) {
-        for (int i = 0; i < aller.length; i++) {
-          if ((Provider.of<UserLocal>(context, listen: true).lactose).toInt() +
-                      allergList[i].lack <=
-                  4 &&
-              (Provider.of<UserLocal>(context, listen: true).fructose).toInt() +
-                      allergList[i].fruc <=
-                  4 &&
-              (Provider.of<UserLocal>(context, listen: true).histamine)
-                          .toInt() +
-                      allergList[i].gist <=
-                  4 &&
-              (Provider.of<UserLocal>(context, listen: true).sorbitol).toInt() +
-                      allergList[i].sorb <=
-                  4 &&
-              (Provider.of<UserLocal>(context, listen: true).gluten).toInt() +
-                      allergList[i].glut <=
-                  4 &&
-              (Provider.of<UserLocal>(context, listen: true).salcylicAcid)
-                          .toInt() +
-                      allergList[i].salcis <=
-                  4) {
-            cnt++;
-          }
-        }
-        return cnt;
-      } else if (Provider.of<UserLocal>(context, listen: true).filterNumber ==
-          3) {
-        for (int i = 0; i < aller.length; i++) {
-          if ((Provider.of<UserLocal>(context, listen: true).lactose).toInt() +
-                      allergList[i].lack >
-                  4 &&
-              (Provider.of<UserLocal>(context, listen: true).fructose).toInt() +
-                      allergList[i].fruc >
-                  4 &&
-              (Provider.of<UserLocal>(context, listen: true).histamine)
-                          .toInt() +
-                      allergList[i].gist >
-                  4 &&
-              (Provider.of<UserLocal>(context, listen: true).sorbitol).toInt() +
-                      allergList[i].sorb >
-                  4 &&
-              (Provider.of<UserLocal>(context, listen: true).gluten).toInt() +
-                      allergList[i].glut >
-                  4 &&
-              (Provider.of<UserLocal>(context, listen: true).salcylicAcid)
-                          .toInt() +
-                      allergList[i].salcis >
-                  4) {
-            cnt++;
-          }
-        }
-        return cnt;
-      }
-    }
   }
 
   Color getColorType(int allergen) {
@@ -220,7 +174,9 @@ class FoodListState extends State<FoodList> {
   }
 }
 
-List<Food> allergList = [
+List<Food> allergList = List<Food>();
+
+List<Food> allergiaList = [
   Food(138, 1, 1, 3, 1, 1, 4, 138, '5-гуанилат калия двузамещенный (E 628)', 10,
       'Пищевые добавки'),
   Food(336, 1, 1, 3, 1, 1, 4, 336, '5-гуанилат кальция (E 629)', 10,
@@ -285,7 +241,7 @@ List<Food> allergList = [
   Food(177, 1, 1, 3, 1, 1, 3, 177, 'Арахисовое масло', 7, 'Орехи и семена'),
   Food(174, 1, 3, 4, 1, 2, 3, 174, 'Арахисовое масло / паста', 7,
       'Орехи и семена'),
-  Food(176, 1, 0, 4, 1, 2, 3, 176, 'Арахисовой мука', 6,
+  Food(176, 1, 0, 4, 1, 2, 3, 176, 'Арахисовая мука', 6,
       'Зерновые и хлебобулочные изделия'),
   Food(763, 1, 3, 1, 1, 1, 3, 763, 'Арбуз', 4, 'Фрукты'),
   Food(30, 1, 1, 3, 4, 1, 4, 30,

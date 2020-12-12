@@ -90,11 +90,11 @@ class Slyd extends StatefulWidget {
 
 class _SlydState extends State<Slyd> {
   int ind;
-  var zero= 0;
+  var zero = 0;
   var levels;
-  String str='';
+  String str = '';
   double _currentSliderValue = 0;
-  String _localFileContent='';
+  String _localFileContent = '';
   _SlydState(indr) {
     ind = indr;
   }
@@ -104,190 +104,206 @@ class _SlydState extends State<Slyd> {
     this.read();
   }
 
-  void write(String str) async{
+  void write(String str) async {
     await this._writeTextToLocalFile(str);
   }
-  void read () async{
+
+  void read() async {
     await this._readTextFromLocalFile();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-              child: SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  activeTrackColor: list[(ind == 0)
-                      ? Provider.of<UserLocal>(context, listen: true).fructose.round()
-                      : (ind == 1)
+      child: SliderTheme(
+        data: SliderTheme.of(context).copyWith(
+          activeTrackColor: list[(ind == 0)
+              ? Provider.of<UserLocal>(context, listen: true).fructose.round()
+              : (ind == 1)
+                  ? Provider.of<UserLocal>(context, listen: true)
+                      .lactose
+                      .round()
+                  : (ind == 2)
+                      ? Provider.of<UserLocal>(context, listen: true)
+                          .histamine
+                          .round()
+                      : (ind == 3)
                           ? Provider.of<UserLocal>(context, listen: true)
-                              .lactose
+                              .sorbitol
                               .round()
-                          : (ind == 2)
+                          : (ind == 4)
                               ? Provider.of<UserLocal>(context, listen: true)
-                                  .histamine
+                                  .gluten
                                   .round()
-                              : (ind == 3)
-                                  ? Provider.of<UserLocal>(context, listen: true)
-                                      .sorbitol
+                              : (ind == 5)
+                                  ? Provider.of<UserLocal>(context,
+                                          listen: true)
+                                      .salcylicAcid
                                       .round()
-                                  : (ind == 4)
-                                      ? Provider.of<UserLocal>(context, listen: true)
-                                          .gluten
-                                          .round()
-                                      : (ind == 5)
-                                          ? Provider.of<UserLocal>(context,
-                                                  listen: true)
-                                              .salcylicAcid
-                                              .round()
-                                          : DoNothingAction()],
-                  inactiveTrackColor: list[(ind == 0)
-                      ? Provider.of<UserLocal>(context, listen: true).fructose.round()
-                      : (ind == 1)
+                                  : DoNothingAction()],
+          inactiveTrackColor: list[(ind == 0)
+              ? Provider.of<UserLocal>(context, listen: true).fructose.round()
+              : (ind == 1)
+                  ? Provider.of<UserLocal>(context, listen: true)
+                      .lactose
+                      .round()
+                  : (ind == 2)
+                      ? Provider.of<UserLocal>(context, listen: true)
+                          .histamine
+                          .round()
+                      : (ind == 3)
                           ? Provider.of<UserLocal>(context, listen: true)
-                              .lactose
+                              .sorbitol
                               .round()
-                          : (ind == 2)
+                          : (ind == 4)
                               ? Provider.of<UserLocal>(context, listen: true)
-                                  .histamine
+                                  .gluten
                                   .round()
-                              : (ind == 3)
-                                  ? Provider.of<UserLocal>(context, listen: true)
-                                      .sorbitol
+                              : (ind == 5)
+                                  ? Provider.of<UserLocal>(context,
+                                          listen: true)
+                                      .salcylicAcid
                                       .round()
-                                  : (ind == 4)
-                                      ? Provider.of<UserLocal>(context, listen: true)
-                                          .gluten
-                                          .round()
-                                      : (ind == 5)
-                                          ? Provider.of<UserLocal>(context,
-                                                  listen: true)
-                                              .salcylicAcid
-                                              .round()
-                                          : DoNothingAction()],
-                  trackShape: RoundSliderTrackShape(),
-                  trackHeight: 22.0,
-                  rangeTrackShape: RoundedRectRangeSliderTrackShape(),
-                  thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10.0),
-                  thumbColor: Colors.white,
-                  overlayShape: RoundSliderOverlayShape(overlayRadius: 22.0),
-                  activeTickMarkColor: list[(ind == 0)
-                      ? Provider.of<UserLocal>(context, listen: true).fructose.round()
-                      : (ind == 1)
+                                  : DoNothingAction()],
+          trackShape: RoundSliderTrackShape(),
+          trackHeight: 22.0,
+          rangeTrackShape: RoundedRectRangeSliderTrackShape(),
+          thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10.0),
+          thumbColor: Colors.white,
+          overlayShape: RoundSliderOverlayShape(overlayRadius: 22.0),
+          activeTickMarkColor: list[(ind == 0)
+              ? Provider.of<UserLocal>(context, listen: true).fructose.round()
+              : (ind == 1)
+                  ? Provider.of<UserLocal>(context, listen: true)
+                      .lactose
+                      .round()
+                  : (ind == 2)
+                      ? Provider.of<UserLocal>(context, listen: true)
+                          .histamine
+                          .round()
+                      : (ind == 3)
                           ? Provider.of<UserLocal>(context, listen: true)
-                              .lactose
+                              .sorbitol
                               .round()
-                          : (ind == 2)
+                          : (ind == 4)
                               ? Provider.of<UserLocal>(context, listen: true)
-                                  .histamine
+                                  .gluten
                                   .round()
-                              : (ind == 3)
-                                  ? Provider.of<UserLocal>(context, listen: true)
-                                      .sorbitol
+                              : (ind == 5)
+                                  ? Provider.of<UserLocal>(context,
+                                          listen: true)
+                                      .salcylicAcid
                                       .round()
-                                  : (ind == 4)
-                                      ? Provider.of<UserLocal>(context, listen: true)
-                                          .gluten
-                                          .round()
-                                      : (ind == 5)
-                                          ? Provider.of<UserLocal>(context,
-                                                  listen: true)
-                                              .salcylicAcid
-                                              .round()
-                                          : DoNothingAction()],
-                  inactiveTickMarkColor: list[(ind == 0)
-                      ? Provider.of<UserLocal>(context, listen: true).fructose.round()
-                      : (ind == 1)
+                                  : DoNothingAction()],
+          inactiveTickMarkColor: list[(ind == 0)
+              ? Provider.of<UserLocal>(context, listen: true).fructose.round()
+              : (ind == 1)
+                  ? Provider.of<UserLocal>(context, listen: true)
+                      .lactose
+                      .round()
+                  : (ind == 2)
+                      ? Provider.of<UserLocal>(context, listen: true)
+                          .histamine
+                          .round()
+                      : (ind == 3)
                           ? Provider.of<UserLocal>(context, listen: true)
-                              .lactose
+                              .sorbitol
                               .round()
-                          : (ind == 2)
+                          : (ind == 4)
                               ? Provider.of<UserLocal>(context, listen: true)
-                                  .histamine
+                                  .gluten
                                   .round()
-                              : (ind == 3)
-                                  ? Provider.of<UserLocal>(context, listen: true)
-                                      .sorbitol
+                              : (ind == 5)
+                                  ? Provider.of<UserLocal>(context,
+                                          listen: true)
+                                      .salcylicAcid
                                       .round()
-                                  : (ind == 4)
-                                      ? Provider.of<UserLocal>(context, listen: true)
-                                          .gluten
-                                          .round()
-                                      : (ind == 5)
-                                          ? Provider.of<UserLocal>(context,
-                                                  listen: true)
-                                              .salcylicAcid
-                                              .round()
-                                          : DoNothingAction()],
-                ),
-                child: Slider(
-                    value: (ind == 0)
-                        ? (Provider.of<UserLocal>(context, listen: true).fructose)
-                        : (ind == 1)
-                            ? Provider.of<UserLocal>(context, listen: true).lactose
-                            : (ind == 2)
+                                  : DoNothingAction()],
+        ),
+        child: Slider(
+            value: (ind == 0)
+                ? (Provider.of<UserLocal>(context, listen: true).fructose)
+                : (ind == 1)
+                    ? Provider.of<UserLocal>(context, listen: true).lactose
+                    : (ind == 2)
+                        ? Provider.of<UserLocal>(context, listen: true)
+                            .histamine
+                        : (ind == 3)
+                            ? Provider.of<UserLocal>(context, listen: true)
+                                .sorbitol
+                            : (ind == 4)
                                 ? Provider.of<UserLocal>(context, listen: true)
-                                    .histamine
-                                : (ind == 3)
-                                    ? Provider.of<UserLocal>(context, listen: true)
-                                        .sorbitol
-                                    : (ind == 4)
-                                        ? Provider.of<UserLocal>(context, listen: true)
-                                            .gluten
-                                        : (ind == 5)
-                                            ? Provider.of<UserLocal>(context,
-                                                    listen: true)
-                                                .salcylicAcid
-                                            : DoNothingAction(),
-                    min: 0,
-                    max: 4,
-                    divisions: 4,
-                    onChanged: (double value) {
-                      setState(() {
-                        _currentSliderValue = value;
-                        (ind == 0)
+                                    .gluten
+                                : (ind == 5)
+                                    ? Provider.of<UserLocal>(context,
+                                            listen: true)
+                                        .salcylicAcid
+                                    : DoNothingAction(),
+            min: 0,
+            max: 4,
+            divisions: 4,
+            onChanged: (double value) {
+              setState(() {
+                _currentSliderValue = value;
+                (ind == 0)
+                    ? Provider.of<UserLocal>(context, listen: false)
+                        .setFructose = value
+                    : (ind == 1)
+                        ? Provider.of<UserLocal>(context, listen: false)
+                            .setLactose = value
+                        : (ind == 2)
                             ? Provider.of<UserLocal>(context, listen: false)
-                                .setFructose = value
-                            : (ind == 1)
+                                .setHistamine = value
+                            : (ind == 3)
                                 ? Provider.of<UserLocal>(context, listen: false)
-                                    .setLactose = value
-                                : (ind == 2)
-                                    ? Provider.of<UserLocal>(context, listen: false)
-                                        .setHistamine = value
-                                    : (ind == 3)
-                                        ? Provider.of<UserLocal>(context, listen: false)
-                                            .setSorbitol = value
-                                        : (ind == 4)
-                                            ? Provider.of<UserLocal>(context,
-                                                    listen: false)
-                                                .setGluten = value
-                                            : (ind == 5)
-                                                ? Provider.of<UserLocal>(context,
-                                                        listen: false)
-                                                    .setSalcylicAcid = value
-                                                : DoNothingAction();
-                        str=Provider.of<UserLocal>(context, listen: false).fructose.toString()+" "+
-                        Provider.of<UserLocal>(context, listen: false).lactose.toString()+" "+
-                        Provider.of<UserLocal>(context, listen: false).histamine.toString()+" "+
-                        Provider.of<UserLocal>(context, listen: false).sorbitol.toString()+" "+
-                        Provider.of<UserLocal>(context, listen: false).gluten.toString()+" "+
-                        Provider.of<UserLocal>(context, listen: false).salcylicAcid.toString();
-                        this._writeTextToLocalFile(str);
-                      });
-                       
-                        
-                    }
-                ),
-              ),
-            );
+                                    .setSorbitol = value
+                                : (ind == 4)
+                                    ? Provider.of<UserLocal>(context,
+                                            listen: false)
+                                        .setGluten = value
+                                    : (ind == 5)
+                                        ? Provider.of<UserLocal>(context,
+                                                listen: false)
+                                            .setSalcylicAcid = value
+                                        : DoNothingAction();
+                str = Provider.of<UserLocal>(context, listen: false)
+                        .fructose
+                        .toString() +
+                    " " +
+                    Provider.of<UserLocal>(context, listen: false)
+                        .lactose
+                        .toString() +
+                    " " +
+                    Provider.of<UserLocal>(context, listen: false)
+                        .histamine
+                        .toString() +
+                    " " +
+                    Provider.of<UserLocal>(context, listen: false)
+                        .sorbitol
+                        .toString() +
+                    " " +
+                    Provider.of<UserLocal>(context, listen: false)
+                        .gluten
+                        .toString() +
+                    " " +
+                    Provider.of<UserLocal>(context, listen: false)
+                        .salcylicAcid
+                        .toString();
+                this._writeTextToLocalFile(str);
+              });
+            }),
+      ),
+    );
   }
 
   Future<String> get _getLocalPath async {
-    final directory =await getApplicationDocumentsDirectory();
+    final directory = await getApplicationDocumentsDirectory();
     return directory.path;
   }
-  
+
   Future<File> get _getLocalFile async {
     final path = await _getLocalPath;
-    return File('$path/uevels.txt');
+    return File('$path/levels.txt');
   }
 
   Future<File> _writeTextToLocalFile(String text) async {
@@ -295,18 +311,17 @@ class _SlydState extends State<Slyd> {
     return file.writeAsString(text);
   }
 
-  Future _readTextFromLocalFile() async{
+  Future _readTextFromLocalFile() async {
     String content;
-    try{
+    try {
       final file = await _getLocalFile;
-      content= await file.readAsString();
-    }catch(e)
-    {
-      content= 'Error loading loacl file: $e';
+      content = await file.readAsString();
+    } catch (e) {
+      content = 'Error loading loacl file: $e';
     }
 
     setState(() {
-      this._localFileContent=content;
+      this._localFileContent = content;
     });
   }
   /* Future _readTextFromLocalFile() async {

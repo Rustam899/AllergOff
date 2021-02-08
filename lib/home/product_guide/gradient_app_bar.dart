@@ -5,15 +5,14 @@ import 'product_guide_filter.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
-class GradientAppBar extends StatefulWidget
-{
-  @override 
+class GradientAppBar extends StatefulWidget {
+  @override
   _GradientAppBarState createState() => _GradientAppBarState();
 }
 
 class _GradientAppBarState extends State<GradientAppBar> {
   var levels;
-  String _localFileContent='';
+  String _localFileContent = '';
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,7 +32,9 @@ class _GradientAppBarState extends State<GradientAppBar> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(
-            'Cправочник продуктов',
+            Provider.of<UserLocal>(context, listen: true).language == 1
+                ? 'Cправочник продуктов'
+                : 'Product guide',
             style: TextStyle(
               color: Colors.white,
               fontSize: 18,
@@ -44,27 +45,32 @@ class _GradientAppBarState extends State<GradientAppBar> {
             hoverElevation: 0.0,
             highlightElevation: 0.0,
             onPressed: () async {
-              var file= await _getLocalFile;
-              if (file.existsSync())
-              {
+              var file = await _getLocalFile;
+              if (file.existsSync()) {
                 await this._readTextFromLocalFile();
-                levels=_localFileContent.split(' ');
-                Provider.of<UserLocal>(context,listen: false).setFructose=double.tryParse(levels[0].toString());
-                Provider.of<UserLocal>(context,listen: false).setLactose=double.tryParse(levels[1].toString());
-                Provider.of<UserLocal>(context,listen: false).setHistamine=double.tryParse(levels[2].toString());
-                Provider.of<UserLocal>(context,listen: false).setSorbitol=double.tryParse(levels[3].toString());
-                Provider.of<UserLocal>(context,listen: false).setGluten=double.tryParse(levels[4].toString());
-                Provider.of<UserLocal>(context,listen: false).setSalcylicAcid=double.tryParse(levels[5].toString());
-                } else
-                {
-                Provider.of<UserLocal>(context,listen: false).setFructose=0;
-                Provider.of<UserLocal>(context,listen: false).setLactose=0;
-                Provider.of<UserLocal>(context,listen: false).setHistamine=0;
-                Provider.of<UserLocal>(context,listen: false).setSorbitol=0;
-                Provider.of<UserLocal>(context,listen: false).setGluten=0;
-                Provider.of<UserLocal>(context,listen: false).setSalcylicAcid=0;
-                }
-                            
+                levels = _localFileContent.split(' ');
+                Provider.of<UserLocal>(context, listen: false).setFructose =
+                    double.tryParse(levels[0].toString());
+                Provider.of<UserLocal>(context, listen: false).setLactose =
+                    double.tryParse(levels[1].toString());
+                Provider.of<UserLocal>(context, listen: false).setHistamine =
+                    double.tryParse(levels[2].toString());
+                Provider.of<UserLocal>(context, listen: false).setSorbitol =
+                    double.tryParse(levels[3].toString());
+                Provider.of<UserLocal>(context, listen: false).setGluten =
+                    double.tryParse(levels[4].toString());
+                Provider.of<UserLocal>(context, listen: false).setSalcylicAcid =
+                    double.tryParse(levels[5].toString());
+              } else {
+                Provider.of<UserLocal>(context, listen: false).setFructose = 0;
+                Provider.of<UserLocal>(context, listen: false).setLactose = 0;
+                Provider.of<UserLocal>(context, listen: false).setHistamine = 0;
+                Provider.of<UserLocal>(context, listen: false).setSorbitol = 0;
+                Provider.of<UserLocal>(context, listen: false).setGluten = 0;
+                Provider.of<UserLocal>(context, listen: false).setSalcylicAcid =
+                    0;
+              }
+
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -81,17 +87,16 @@ class _GradientAppBarState extends State<GradientAppBar> {
         ],
       ),
     );
-
-  
   }
+
   /* Future<String> getFileData(String path) async {
   return await rootBundle.loadString(path);
   } */
   Future<String> get _getLocalPath async {
-    final directory =await getApplicationDocumentsDirectory();
+    final directory = await getApplicationDocumentsDirectory();
     return directory.path;
   }
-  
+
   Future<File> get _getLocalFile async {
     final path = await _getLocalPath;
     return File('$path/levels.txt');
@@ -102,19 +107,17 @@ class _GradientAppBarState extends State<GradientAppBar> {
     return file.writeAsString(text);
   }
 
-  Future _readTextFromLocalFile() async{
+  Future _readTextFromLocalFile() async {
     String content;
-    try{
+    try {
       final file = await _getLocalFile;
-      content= await file.readAsString();
-    }catch(e)
-    {
-      content= 'Error loading loacl file: $e';
+      content = await file.readAsString();
+    } catch (e) {
+      content = 'Error loading loacl file: $e';
     }
 
     setState(() {
-      this._localFileContent=content;
+      this._localFileContent = content;
     });
   }
-  
 }

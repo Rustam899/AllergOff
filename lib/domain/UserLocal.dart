@@ -10,6 +10,9 @@ class UserLocal with ChangeNotifier {
   double _gluten;
   double _salcylicAcid;
 
+  //язык в приложении
+  int _language; //1 - ru, 2 - en
+
   //настройки фильтра
   bool _personFilterOn = false; // фильтр вкл/вкл
   int _filterNumber =
@@ -23,6 +26,7 @@ class UserLocal with ChangeNotifier {
   double get salcylicAcid => _salcylicAcid;
   bool get personFilterOn => _personFilterOn;
   int get filterNumber => _filterNumber;
+  int get language => _language;
 
   //cеттеры
   set setFructose(double value) {
@@ -62,6 +66,11 @@ class UserLocal with ChangeNotifier {
 
   set setFilterNumber(int value) {
     _filterNumber = value;
+    notifyListeners();
+  }
+
+  set setLanguage(int val) {
+    _language = val;
     notifyListeners();
   }
 }

@@ -16,17 +16,18 @@ class PersonWidget extends StatefulWidget {
 class _PersonState extends State<PersonWidget> {
   var levels;
   String _localFileContent;
-  @override 
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
     this._readTextFromLocalFile();
   }
 
-  void write(String str) async{
+  void write(String str) async {
     await this._writeTextToLocalFile(str);
   }
-  void read () async{
+
+  void read() async {
     await this._readTextFromLocalFile();
   }
 
@@ -71,7 +72,11 @@ class _PersonState extends State<PersonWidget> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         Text(
-                          'Выйти',
+                          Provider.of<UserLocal>(context, listen: true)
+                                      .language ==
+                                  1
+                              ? 'Выйти'
+                              : "Exit",
                           style: TextStyle(
                               fontSize: 16,
                               color: Color.fromRGBO(220, 88, 80, 1)),
@@ -111,8 +116,13 @@ class _PersonState extends State<PersonWidget> {
                                   color: Colors.grey,
                                 ),
                                 Text(
-                                  'Мой календарь',
-                                  style: TextStyle(fontSize: 12,color: Colors.grey),
+                                  Provider.of<UserLocal>(context, listen: true)
+                                              .language ==
+                                          1
+                                      ? 'Мой календарь'
+                                      : "My calendar",
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.grey),
                                 ),
                               ],
                             ),
@@ -128,8 +138,13 @@ class _PersonState extends State<PersonWidget> {
                                   color: Colors.grey,
                                 ),
                                 Text(
-                                  'Информация',
-                                  style: TextStyle(fontSize: 12,color:Colors.grey),
+                                  Provider.of<UserLocal>(context, listen: true)
+                                              .language ==
+                                          1
+                                      ? 'Информация'
+                                      : "Information",
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.grey),
                                 ),
                               ],
                             ),
@@ -149,27 +164,43 @@ class _PersonState extends State<PersonWidget> {
                           FlatButton(
                             padding: EdgeInsets.only(left: 0),
                             onPressed: () async {
-                                var file= await _getLocalFile;
-                                if (file.existsSync())
-                                {
+                              var file = await _getLocalFile;
+                              if (file.existsSync()) {
                                 await this._readTextFromLocalFile();
-                                levels=_localFileContent.split(' ');
-                                Provider.of<UserLocal>(context,listen: false).setFructose=double.tryParse(levels[0].toString());
-                                Provider.of<UserLocal>(context,listen: false).setLactose=double.tryParse(levels[1].toString());
-                                Provider.of<UserLocal>(context,listen: false).setHistamine=double.tryParse(levels[2].toString());
-                                Provider.of<UserLocal>(context,listen: false).setSorbitol=double.tryParse(levels[3].toString());
-                                Provider.of<UserLocal>(context,listen: false).setGluten=double.tryParse(levels[4].toString());
-                                Provider.of<UserLocal>(context,listen: false).setSalcylicAcid=double.tryParse(levels[5].toString());
-                                } else
-                                {
-                                Provider.of<UserLocal>(context,listen: false).setFructose=0;
-                                Provider.of<UserLocal>(context,listen: false).setLactose=0;
-                                Provider.of<UserLocal>(context,listen: false).setHistamine=0;
-                                Provider.of<UserLocal>(context,listen: false).setSorbitol=0;
-                                Provider.of<UserLocal>(context,listen: false).setGluten=0;
-                                Provider.of<UserLocal>(context,listen: false).setSalcylicAcid=0;
-                                }
-                            
+                                levels = _localFileContent.split(' ');
+                                Provider.of<UserLocal>(context, listen: false)
+                                        .setFructose =
+                                    double.tryParse(levels[0].toString());
+                                Provider.of<UserLocal>(context, listen: false)
+                                        .setLactose =
+                                    double.tryParse(levels[1].toString());
+                                Provider.of<UserLocal>(context, listen: false)
+                                        .setHistamine =
+                                    double.tryParse(levels[2].toString());
+                                Provider.of<UserLocal>(context, listen: false)
+                                        .setSorbitol =
+                                    double.tryParse(levels[3].toString());
+                                Provider.of<UserLocal>(context, listen: false)
+                                        .setGluten =
+                                    double.tryParse(levels[4].toString());
+                                Provider.of<UserLocal>(context, listen: false)
+                                        .setSalcylicAcid =
+                                    double.tryParse(levels[5].toString());
+                              } else {
+                                Provider.of<UserLocal>(context, listen: false)
+                                    .setFructose = 0;
+                                Provider.of<UserLocal>(context, listen: false)
+                                    .setLactose = 0;
+                                Provider.of<UserLocal>(context, listen: false)
+                                    .setHistamine = 0;
+                                Provider.of<UserLocal>(context, listen: false)
+                                    .setSorbitol = 0;
+                                Provider.of<UserLocal>(context, listen: false)
+                                    .setGluten = 0;
+                                Provider.of<UserLocal>(context, listen: false)
+                                    .setSalcylicAcid = 0;
+                              }
+
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -185,8 +216,13 @@ class _PersonState extends State<PersonWidget> {
                                   color: Colors.grey,
                                 ),
                                 Text(
-                                  'Мои непереносимости',
-                                  style: TextStyle(fontSize: 12,color: Colors.grey),
+                                  Provider.of<UserLocal>(context, listen: true)
+                                              .language ==
+                                          1
+                                      ? 'Мои непереносимости'
+                                      : "My intolerances",
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.grey),
                                 ),
                               ],
                             ),
@@ -202,8 +238,15 @@ class _PersonState extends State<PersonWidget> {
                                   color: Colors.grey,
                                 ),
                                 Text(
-                                  'Настройки',
-                                  style: TextStyle(fontSize: 12,color:Colors.grey,),
+                                  Provider.of<UserLocal>(context, listen: true)
+                                              .language ==
+                                          1
+                                      ? 'Настройки'
+                                      : "Settings",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               ],
                             ),
@@ -243,14 +286,15 @@ class _PersonState extends State<PersonWidget> {
       ),
     );
   }
+
   Future<String> get _getLocalPath async {
-    final directory =await getApplicationDocumentsDirectory();
+    final directory = await getApplicationDocumentsDirectory();
     return directory.path;
   }
-  
+
   Future<File> get _getLocalFile async {
     final path = await _getLocalPath;
-    return File('$path/uevels.txt');
+    return File('$path/levels.txt');
   }
 
   Future<File> _writeTextToLocalFile(String text) async {
@@ -258,18 +302,17 @@ class _PersonState extends State<PersonWidget> {
     return file.writeAsString(text);
   }
 
-  Future _readTextFromLocalFile() async{
+  Future _readTextFromLocalFile() async {
     String content;
-    try{
+    try {
       final file = await _getLocalFile;
-      content= await file.readAsString();
-    }catch(e)
-    {
-      content= 'Error loading loacl file: $e';
+      content = await file.readAsString();
+    } catch (e) {
+      content = 'Error loading local file: $e';
     }
 
     setState(() {
-      this._localFileContent=content;
+      this._localFileContent = content;
     });
   }
 }

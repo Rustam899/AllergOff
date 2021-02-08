@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:allerg_off_prototype/domain/UserLocal.dart';
+import 'package:provider/provider.dart';
 
 class AppSearch extends StatefulWidget {
   @override
@@ -33,7 +35,9 @@ class _AppSearchState extends State<AppSearch> {
             Icons.search,
             color: Colors.white,
           ),
-          hintText: 'Поиск',
+          hintText: Provider.of<UserLocal>(context, listen: true).language == 1
+              ? 'Поиск'
+              : 'Search',
           hintStyle: TextStyle(
             color: Colors.white,
           ),

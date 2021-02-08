@@ -11,7 +11,9 @@ class AllergLevels extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Мои непереносимости'),
+        title: Text(Provider.of<UserLocal>(context, listen: true).language == 1
+            ? 'Мои непереносимости'
+            : "My intolerances"),
         backgroundColor: Color.alphaBlend(
             Color.fromRGBO(56, 183, 143, 1), Color.fromRGBO(58, 167, 177, 1)),
       ),
@@ -42,16 +44,28 @@ class Level extends StatelessWidget {
   Level(int i) {
     ind = i;
   }
-  var names = [
-    'Фруктоза (Ф)',
-    'Лактоза (Л)',
-    'Гистамин (Ги)',
-    'Сорбитол (Со)',
-    'Глютен (Гл)',
-    'Сальциловая Кислота (СК)'
-  ];
+  var names;
   @override
   Widget build(BuildContext context) {
+    if (Provider.of<UserLocal>(context, listen: true).language == 1) {
+      names = [
+        'Фруктоза (Ф)',
+        'Лактоза (Л)',
+        'Гистамин (Ги)',
+        'Сорбитол (Со)',
+        'Глютен (Гл)',
+        'Сальциловая Кислота (СК)'
+      ];
+    } else {
+      names = [
+        'Fructose (F)',
+        'Lactose (L)',
+        'Histamine (Hi)',
+        'Sorbitol (So)',
+        'Gluten (Gl)',
+        'Salicylic acid (SA)'
+      ];
+    }
     return Column(children: <Widget>[
       Container(
         height: 30,

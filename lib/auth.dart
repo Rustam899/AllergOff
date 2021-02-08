@@ -1,3 +1,6 @@
+import 'package:allerg_off_prototype/home/Navigation/bottom_bar.dart';
+import 'package:allerg_off_prototype/domain/UserLocal.dart';
+import 'package:provider/provider.dart';
 import 'services/auth.dart';
 import 'package:flutter/material.dart';
 import 'domain/User.dart';
@@ -43,12 +46,11 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
               children: <Widget>[
                 Container(
                   height: 230,
-                    decoration:BoxDecoration(
-                    image: DecorationImage(
-                      fit:BoxFit.fill,
-                      image: AssetImage('assets/images/BackOnRegAuthTop.png'),
-                    )
-                  ),
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: AssetImage('assets/images/BackOnRegAuthTop.png'),
+                  )),
                 ),
                 Container(
                   padding: EdgeInsets.only(top: 65),
@@ -135,7 +137,11 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
                             Icons.email,
                             color: Color.fromRGBO(58, 177, 155, 1),
                           ),
-                          "Почта",
+                          Provider.of<UserLocal>(context, listen: true)
+                                      .language ==
+                                  1
+                              ? "Почта"
+                              : "Email",
                           _emailController,
                           false),
                     ),
@@ -144,7 +150,11 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
                       child: _input(
                           Icon(Icons.lock,
                               color: Color.fromRGBO(58, 177, 155, 1)),
-                          "Пароль",
+                          Provider.of<UserLocal>(context, listen: true)
+                                      .language ==
+                                  1
+                              ? "Пароль"
+                              : "Password",
                           _passwordController,
                           true),
                     ),
@@ -181,7 +191,9 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
           _email.trim(), _password.trim());
       if (user == null) {
         Fluttertoast.showToast(
-            msg: "Неверный логин и/или пароль!",
+            msg: Provider.of<UserLocal>(context, listen: true).language == 1
+                ? "Неверный логин и/или пароль!"
+                : "Icorrect email and/or password!",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             backgroundColor: Colors.red,
@@ -190,6 +202,8 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
       } else {
         _emailController.clear();
         _passwordController.clear();
+        Navigator.push(context,
+            MaterialPageRoute(builder: (BuildContext context) => BottomBar()));
       }
     }
 
@@ -202,7 +216,9 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
           _email.trim(), _password.trim());
       if (user == null) {
         Fluttertoast.showToast(
-            msg: "Слишком короткий пароль!",
+            msg: Provider.of<UserLocal>(context, listen: true).language == 1
+                ? "Слишком короткий пароль!"
+                : "The password is too short!",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             backgroundColor: Colors.red,
@@ -229,16 +245,31 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      _form('Войти', _loginButtonAction),
+                      _form(
+                          Provider.of<UserLocal>(context, listen: true)
+                                      .language ==
+                                  1
+                              ? "Войти"
+                              : "Login",
+                          _loginButtonAction),
                       Padding(
                         padding: EdgeInsets.only(bottom: 36),
                         child: GestureDetector(
                           child: Text.rich(TextSpan(
-                            text: 'Впервые?',
+                            text: Provider.of<UserLocal>(context, listen: true)
+                                        .language ==
+                                    1
+                                ? "Впервые?"
+                                : "Fisrt time here?",
                             style: TextStyle(fontSize: 14, color: Colors.black),
                             children: <TextSpan>[
                               TextSpan(
-                                text: ' Зарегестрируйтесь! ',
+                                text: Provider.of<UserLocal>(context,
+                                                listen: true)
+                                            .language ==
+                                        1
+                                    ? " Зарегестрируйтесь! "
+                                    : " Rerister now! ",
                                 style: TextStyle(
                                     color: Color.fromRGBO(58, 177, 155, 1)),
                               ),
@@ -257,11 +288,22 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
               : Expanded(
                   child: Column(
                     children: <Widget>[
-                      _form('Зарегестрироваться', _registerButtonAction),
+                      _form(
+                          Provider.of<UserLocal>(context, listen: true)
+                                      .language ==
+                                  1
+                              ? "Зарегестрироваться"
+                              : "Register",
+                          _registerButtonAction),
                       Padding(
                         padding: EdgeInsets.only(bottom: 36),
                         child: GestureDetector(
-                          child: Text('Войти',
+                          child: Text(
+                              Provider.of<UserLocal>(context, listen: true)
+                                          .language ==
+                                      1
+                                  ? "Войти"
+                                  : "Login",
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.black,

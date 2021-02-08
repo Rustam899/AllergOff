@@ -1,3 +1,4 @@
+import 'package:allerg_off_prototype/home/Navigation/bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:allerg_off_prototype/domain/UserLocal.dart';
 import 'package:provider/provider.dart';
@@ -23,11 +24,21 @@ class _FilterState extends State<Filter> {
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(58, 167, 177, 1),
         title: Text(
-          'Мои непереносимости',
+          Provider.of<UserLocal>(context, listen: true).language == 1
+              ? 'Мои непереносимости'
+              : 'My intolerances',
           style: TextStyle(
             color: Colors.white,
             fontSize: 18,
           ),
+        ),
+        leading: BackButton(
+          onPressed: () {
+            return Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => BottomBar()));
+          },
         ),
       ),
       body: Column(
@@ -36,7 +47,9 @@ class _FilterState extends State<Filter> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Text('Персонализированный фильтр'),
+              Text(Provider.of<UserLocal>(context, listen: true).language == 1
+                  ? 'Персонализированный фильтр'
+                  : 'Personal filter'),
               Switch(
                 value: Provider.of<UserLocal>(context, listen: true)
                     .personFilterOn,
@@ -56,7 +69,9 @@ class _FilterState extends State<Filter> {
           ListTile(
             //кнопка 1
             title: Text(
-              'Показывать, то что можно',
+              Provider.of<UserLocal>(context, listen: true).language == 1
+                  ? 'Показывать то, что можно'
+                  : "Show what's safe",
               style: TextStyle(
                   color: Provider.of<UserLocal>(context, listen: true)
                           .personFilterOn
@@ -89,7 +104,9 @@ class _FilterState extends State<Filter> {
           ListTile(
             //кнопка 3
             title: Text(
-              'Показывать, то что нельзя',
+              Provider.of<UserLocal>(context, listen: true).language == 1
+                  ? 'Показывать то, что нельзя'
+                  : "Show what isn't safe",
               style: TextStyle(
                 color: Provider.of<UserLocal>(context, listen: true)
                         .personFilterOn
